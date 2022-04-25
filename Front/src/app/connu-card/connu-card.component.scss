@@ -1,0 +1,44 @@
+::ng-deep{
+    .carte{
+        background-color: blueviolet;
+        width: 340px;
+        margin: 10px;
+      }
+    .p-card-header{
+        background-color: violet;
+    }
+}
+
+
+.p-scrollpanel {
+    &.custombar1 {
+        .p-scrollpanel-wrapper {
+            border-right: 9px solid var(--layer-1);
+        }
+
+        .p-scrollpanel-bar {
+            background-color: black;
+            opacity: 1;
+            transition: background-color .2s;
+
+            &:hover {
+                background-color: black;
+            }
+        }
+    }
+
+    &.custombar2 {
+        .p-scrollpanel-wrapper {
+            border-right: 9px solid black;
+            border-bottom: 9px solid black;
+        }
+
+        .p-scrollpanel-bar {
+            background:black;
+            border-radius: 0;
+            opacity: 1;
+            transition: background-color .2s;
+        }
+    }
+
+}

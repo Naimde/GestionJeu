@@ -1,0 +1,40 @@
+td,th{
+    border: 2px solid black;
+    padding : 0;
+    border-spacing: 0;
+    text-align: center;
+    background-color:var(--blue-600);
+}
+
+::placeholder{
+    color: rgba(87, 87, 87, 0.568);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+input{
+    width: 100%;
+    text-align: center;
+}
+
+ul{
+    margin: 0;
+}
+li{
+    text-align: left;
+}
+
+hr{
+    border-color: grey;
+}
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}

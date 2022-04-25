@@ -1,0 +1,40 @@
+<table>
+    <thead>
+        <th>Username</th>
+        <th>Mail</th>
+        <th>Autorities</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr [formGroup]="Addform">
+            <td><input formControlName="username" type="text" placeholder="Username" name="name"></td>
+            <td><input formControlName="mail" type="email" placeholder="Mail" name="mail"></td>
+            <td><input formControlName="password" type="text" placeholder="Password" name="password"></td>
+            <td><button pButton label="Créer" class="p-button-success" (click)="createUser()"></button>
+        </tr>
+        <tr *ngFor="let user of users; let index = index">
+            <td>{{user.username}}</td>
+            <td><input (change)="enregistrerUser(users[index])" type="text" [(ngModel)]="users[index].mail"  pInputText></td>
+            <td>
+                <ul>
+                    <div *ngFor="let role of user.roles" class="flex">
+                        <li class="col-6">{{role.name}}</li>
+                        <button pButton label="Delete" class="p-button-warning" (click)="deleteRole(user.username,role)"></button>
+                    </div>
+                </ul>
+                <hr *ngIf="user.roles.length!=0&&user.roles.length!=roleList.length">
+                <ul>
+                    <div *ngFor="let rolemanquant of roleList">
+                        <div *ngIf="isNotInUserRole(rolemanquant,user)" class="flex">
+                            <li>{{rolemanquant.name}}</li>
+                            <button pButton label="Ajouter" class="p-button-success" (click)="addRole(user.username,rolemanquant)"></button>
+                        </div>
+                    </div>
+                </ul>
+            </td>
+            <td>
+                <button pButton label="Delete" class="p-button-danger" (click)="deleteUser(user.username)" [disabled]="user.roles.length!==0"></button>       
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,15 @@
+<div *ngFor="let auto of autorisation">
+    <div *ngIf="genre(auto.name)=='admin'">  
+        <button pButton (click)="aller(auto.name)" class="p-button-secondary">{{auto.name}}</button>
+    </div>
+</div>
+<div *ngFor="let auto of autorisation">
+    <div *ngIf="genre(auto.name)=='orga-jeu'">
+        <button pButton (click)="aller(auto.name)" class="p-button-secondary">{{auto.name}}</button>
+    </div>
+</div>
+<div *ngFor="let auto of autorisation">
+    <div *ngIf="genre(auto.name)=='jeu'">
+        <button pButton (click)="aller(auto.name)" class="p-button-secondary">{{auto.name}}</button>
+    </div>
+</div>

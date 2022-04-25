@@ -1,0 +1,7 @@
+<div *ngFor="let perso of membres">
+    <li>
+        <span>{{perso.idPersonnage}}</span>
+        <div *ngIf="perso.description">{{perso.description}}</div>
+        <div *ngIf="!perso.description">------</div>
+    </li>
+</div>

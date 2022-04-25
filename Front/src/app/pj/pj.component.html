@@ -1,0 +1,46 @@
+<div style="background-color:var(--surface-a);">
+  <p-tabView [scrollable]="true">
+    <p-tabPanel header="Mon Personnage" [selected]="true">
+      personnage
+    </p-tabPanel>
+    <p-tabPanel header="Mes Groupes">
+      <h3>Genre 1</h3>
+      Tout les groupes dans membre du Genre 1
+      <h3>Genre 2</h3>
+      Tout les groupes dans membre du Genre 2
+      <h3>etc</h3>
+    </p-tabPanel>
+    <p-tabPanel header="Autres Personnages">
+      <app-perso-connu></app-perso-connu>
+    </p-tabPanel>
+    <p-tabPanel header="Les Autres Groupes">
+      <app-groupe-connu></app-groupe-connu>
+    </p-tabPanel>
+    <p-tabPanel header="Les Lieux">
+      <h3>Là où je suis</h3>
+      Récupérer le lieu où personnage.loc
+      <br>
+      <h3>Les Lieux que j'ai repéré</h3>
+      <app-lieu-connu></app-lieu-connu>
+    </p-tabPanel>
+    <p-tabPanel header="Les Objets">
+      <h3>Mes Objets</h3>
+      Récupérer les objets où possesseur=personnage et connus
+      <br>
+      <h3>Les Objets que j'ai repéré</h3>
+      Récupérer les objets connus (sauf ceux portés)
+    </p-tabPanel>
+    <p-tabPanel header="Les Secrets">
+      <h3>Mes Secrets</h3>
+      Récupérer les secrets du Personnage et connus
+      <br>
+      <h3>Les Secrets que j'ai appris</h3>
+      Récupérer les secrets connus (si cible pas connue, afficher ???)
+    </p-tabPanel>
+    <p-tabPanel header="Actions">
+      Nouvelle Action
+      <h3>Ce que j'ai fait</h3>
+      Liste des actions ou action.persoid=Personnage.ID
+    </p-tabPanel>
+  </p-tabView>
+</div>

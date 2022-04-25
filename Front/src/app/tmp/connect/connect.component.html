@@ -1,0 +1,8 @@
+<h3>Récupération du token</h3>
+<input type="text" name="username" [(ngModel)]="login">
+<input type="password" name="password" [(ngModel)]="password">
+<br>
+<button (click)="getToken()">Get Token</button>
+<p>Token : {{tokemtext}}</p>
+<button (click)="getMe()">Get Me</button>
+<p>ME : {{loginRecup}}</p>

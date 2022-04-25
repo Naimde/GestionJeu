@@ -1,0 +1,44 @@
+<p-sidebar [(visible)]="display" position="right" styleClass="p-sidebar-md">
+    <span>Id Groupe : {{groups[groupeAffiche].id_groupe}}</span>
+    <h4>Nom</h4>
+    <span>{{groups[groupeAffiche].nom}}</span>
+    <h4>Vision des membres les uns rapport aux autres</h4>
+    <p-toggleButton (onChange)="enregistrerGroupe(groups[groupeAffiche])" onLabel="Visible" offLabel="Caché" [(ngModel)]="groups[groupeAffiche].visionautre"></p-toggleButton>    <h4>Leader</h4>
+    <span>{{groups[groupeAffiche].leader}}</span>
+    <h4>Membres</h4>
+    <app-affiche-membre [groupe]="groups[groupeAffiche]"></app-affiche-membre>
+    <h4>Description</h4>
+    <span>{{groups[groupeAffiche].description}}</span>
+</p-sidebar>
+
+<table>
+    <thead>
+        <th>Genre</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Membres</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr [formGroup]="Addform">
+            <td><input formControlName="genre" type="text" placeholder="Genre"></td>
+            <td><input formControlName="nom" type="email" placeholder="Nom"></td>
+            <td><input formControlName="description" type="text" placeholder="Description"></td>
+            <td><button pButton label="Créer" class="p-button-success" (click)="createGroupe()"></button></td>
+         </tr>
+        <tr *ngFor="let group of groups; let index = index">
+            <td>{{groups[index].genre}}</td>
+            <td><input (change)="enregistrerGroupe(groups[index])" type="text" [(ngModel)]="groups[index].nom"  pInputText></td>
+            <td><input (change)="enregistrerGroupe(groups[index])" type="text" [(ngModel)]="groups[index].description"  pInputText></td>
+            <td>
+                <app-affiche-membre [groupe]="groups[index]"></app-affiche-membre>
+            </td>
+            <td><p-toggleButton (onChange)="enregistrerGroupe(groups[index])" onLabel="Visible" offLabel="Caché" [(ngModel)]="groups[index].visionautre"></p-toggleButton></td>
+            
+            <td>
+                <button pButton label="Delete" class="p-button-danger" (click)="deleteGroupe(group)"></button>       
+            </td>
+            <button pButton  type="text" (click)="afficheLateral(index)" icon="pi pi-plus" label="Détails"></button>
+        </tr>
+    </tbody>
+</table>

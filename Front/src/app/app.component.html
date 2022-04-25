@@ -1,0 +1,12 @@
+<nav *ngIf="loggedIn()" pInputText style="background-color:var(--surface-b);">
+    <h2>En tête</h2>
+    <button pButton class="p-button-info" (click)="retour()">Retour Menu</button>
+    <br>
+    <br>
+    <button pButton class="p-button-info" (click)="logOut()">Déconnection</button>
+</nav>
+<!-- <app-connect></app-connect> -->
+<!-- <app-admin></app-admin> -->
+<!-- <app-orga></app-orga>
+ --><!-- <app-pj></app-pj> -->
+<router-outlet></router-outlet>
