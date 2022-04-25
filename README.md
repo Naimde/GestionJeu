@@ -1,6 +1,7 @@
 # GestionJeu
 
-  Sécurité, reste à faire
+Sécurité, reste à faire
+
 Front : dans l'interceptor, rajouter la vérification de validité de token (localstorage.get("expiration") )
 
 Front, reste à faire
