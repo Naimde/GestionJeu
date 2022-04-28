@@ -17,7 +17,7 @@ export class AdminApiService {
   }
 
   createUser(user:any): Observable<User> {
-    return this.http.post<any>(this.baseUrl,user)
+    return this.http.post<any>("http://localhost:8080/register",user)
   }
 
   deleteUser(id:string): Observable<User> {

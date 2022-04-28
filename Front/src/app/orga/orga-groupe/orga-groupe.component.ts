@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrgaApiService } from 'src/app/api/orga-api.service';
-import { Groupe, Membre } from 'src/app/models/game.service';
+import { Groupe, Membre, Personnage } from 'src/app/models/game.service';
 
 @Component({
   selector: 'app-orga-groupe',
@@ -13,6 +13,9 @@ export class OrgaGroupeComponent implements OnInit {
   groupeAffiche:number=1;
   groups:Groupe[]=[];
   Addform!:FormGroup;
+  Personnages:Personnage[]=[];
+  PersoSelect!:string;
+  membres:Membre[]=[];
 
   constructor(
     private api: OrgaApiService, private formbuilder:FormBuilder
@@ -21,7 +24,7 @@ export class OrgaGroupeComponent implements OnInit {
 
   ngOnInit() {
     this.loadAllGroups();
-    
+    this.recupPersonnage();
     this.Addform = this.formbuilder.group({
       genre:['',Validators.required],
       nom:['',Validators.required],
@@ -46,13 +49,27 @@ export class OrgaGroupeComponent implements OnInit {
   }
 
   enregistrerGroupe(Groupe:Groupe){
-    this.api.editGroupe(Groupe).subscribe(() => this.loadAllGroups());
+    this.api.editGroupe(Groupe).subscribe();
   }
 
   afficheLateral(index:number){
     this.display=true;
     this.groupeAffiche=index;
-    console.log(this.groupeAffiche)
+    this.trouveMembre(this.groups[index]);
+    this.PersoSelect="";
   }
 
+  recupPersonnage(){
+    this.api.getAllPersonnage(localStorage.getItem("jeu")!).subscribe(x=>this.Personnages=x);
+  }
+
+  trouveMembre(groupe:Groupe){
+    this.api.trouveMembre(groupe.id_groupe).subscribe(x => {this.membres=x});
+  }
+
+  isNotMember(perso:Personnage): Boolean{
+    if(this.membres.find(e => e.idPersonnage === perso.id_personnage))
+      return false;
+    return true;
+  }
 }

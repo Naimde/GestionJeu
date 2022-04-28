@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            email: ['', Validators.required],
+            mail: ['', Validators.required],
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
@@ -38,14 +38,11 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        console.log("envois");
         // stop here if form is invalid
         if (this.registerForm.invalid) {
-            console.log("envois");
-
             return;
         }
-
+        console.log(this.registerForm.value);
         this.loading = true;
         this.userService.createUser(this.registerForm.value).subscribe(data => 
           {

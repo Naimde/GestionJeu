@@ -39,7 +39,7 @@
                 <ul>
                     <div *ngFor="let role of user.roles" class="flex">
                         <li class="col-6">{{role.name}}</li>
-                        <button pButton label="Delete" class="p-button-warning" (click)="deleteRole(user.username,role)"></button>
+                        <button [disabled]="role.id==1" pButton label="Delete" class="p-button-warning" (click)="deleteRole(user.username,role)"></button>
                     </div>
                 </ul>
                 <hr *ngIf="user.roles.length!=0&&user.roles.length!=roleList.length">
@@ -47,7 +47,7 @@
                     <div *ngFor="let rolemanquant of roleList">
                         <div *ngIf="isNotInUserRole(rolemanquant,user)" class="flex">
                             <li>{{rolemanquant.name}}</li>
-                            <button pButton label="Ajouter" class="p-button-success" (click)="addRole(user.username,rolemanquant)"></button>
+                            <button [disabled]="rolemanquant.id==1" pButton label="Ajouter" class="p-button-success" (click)="addRole(user.username,rolemanquant)"></button>
                         </div>
                     </div>
                 </ul>

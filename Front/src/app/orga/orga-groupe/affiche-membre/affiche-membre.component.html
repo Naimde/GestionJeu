@@ -1,7 +1,11 @@
-<div *ngFor="let perso of membres">
+<div *ngFor="let perso of membres;let index = index">
     <li>
-        <span>{{perso.idPersonnage}}</span>
-        <div *ngIf="perso.description">{{perso.description}}</div>
-        <div *ngIf="!perso.description">------</div>
+        <app-perso-nom [id]="membres[index].idPersonnage"></app-perso-nom>
+        <span class="flex">
+            <span *ngIf="vision">Info au groupe :</span>
+            <textarea *ngIf="vision" (change)="enregistrerChange(membres[index])" pInputTextarea cols="40" [rows]="1" [(ngModel)]="membres[index].description" placeholder="Rien de spécial" [autoResize]="true" ></textarea>
+            <button *ngIf="action" pButton type="submit" class="p-button-danger" (click)="deleteMembre(membres[index])" icon="pi pi-times" label="Retirer"></button>
+        </span>
     </li>
+
 </div>

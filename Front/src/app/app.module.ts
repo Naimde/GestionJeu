@@ -12,6 +12,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {RippleModule} from 'primeng/ripple';
 import {SidebarModule} from 'primeng/sidebar';
 import {ToggleButtonModule} from 'primeng/togglebutton';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 
@@ -67,7 +68,8 @@ import { PersoNomComponent } from './helpers/perso-nom/perso-nom.component';
     ReactiveFormsModule,
     SidebarModule,
     appRoutingModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    InputTextareaModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

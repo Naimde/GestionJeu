@@ -39,18 +39,14 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         // stop here if form is invalid
-        console.log("ok");
         if (this.loginForm.invalid) {
             return;
         }
-        console.log("ok");
         this.authenticationService.getToken(this.loginForm.get("username")?.value, this.loginForm.get("password")?.value).subscribe(
                 data => {
                     localStorage.setItem("token",data.accessToken);
                     localStorage.setItem("expiration",data.expiresAt);
                     this.router.navigate([this.returnUrl]);
-                    console.log("ok");
-
                 });
     }
 }

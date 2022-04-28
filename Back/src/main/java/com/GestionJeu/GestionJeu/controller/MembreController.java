@@ -65,9 +65,9 @@ public class MembreController {
     return ResponseEntity.ok().body(result.get());
     }
 
-    @PutMapping("/api/v1/membres/{id}/{groupe}")
-    @ResponseBody ResponseEntity<Membre> modify(@PathVariable String id,@PathVariable String groupe, @RequestBody MembreRequest requestDTO){
-        MembreComposite cle = new MembreComposite(id, groupe);
+    @PutMapping("/api/v1/membres")
+    @ResponseBody ResponseEntity<Membre> modify(@RequestBody MembreRequest requestDTO){
+        MembreComposite cle = new MembreComposite(requestDTO.idGroupe, requestDTO.idPersonnage);
         Optional<Membre> result = membrerepository.findById(cle);
     if(result.isEmpty())
     return ResponseEntity.notFound().build();

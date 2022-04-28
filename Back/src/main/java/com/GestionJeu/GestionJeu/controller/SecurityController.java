@@ -23,6 +23,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import com.GestionJeu.GestionJeu.domain.AppUser;
+import com.GestionJeu.GestionJeu.dto.AppUserRequest;
 import com.GestionJeu.GestionJeu.dto.TokenRequest;
 import com.GestionJeu.GestionJeu.dto.TokenResponse;
 import com.GestionJeu.GestionJeu.repository.AppUserRepository;
@@ -84,10 +85,11 @@ public class SecurityController {
     }
 
 	@PostMapping("/register")
-	public @ResponseBody ResponseEntity<AppUser> register(@RequestBody TokenRequest requestDto) {
+	public @ResponseBody ResponseEntity<AppUser> register(@RequestBody AppUserRequest requestDto) {
 		AppUser appUser = new AppUser();
-		appUser.setUsername(requestDto.getUsername());
-		appUser.setPassword(passwordEncoder.encode(requestDto.getPassword()));
+		appUser.setUsername(requestDto.username);
+		appUser.setMail(requestDto.mail);
+		appUser.setPassword(passwordEncoder.encode(requestDto.password));
 		appUserRepository.save(appUser);
 		return ResponseEntity.ok(appUser);
 	}

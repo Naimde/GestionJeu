@@ -1,1 +1,5 @@
-<p>perso-nom works!</p>
+<span *ngIf="CePersonnage">
+    <span *ngIf="CePersonnage.nom">{{CePersonnage.nom}} </span>
+    <span *ngIf="CePersonnage.surnom">"{{CePersonnage.surnom}}" </span>
+    <span *ngIf="CePersonnage.prenom">{{CePersonnage.prenom}}</span>
+</span>

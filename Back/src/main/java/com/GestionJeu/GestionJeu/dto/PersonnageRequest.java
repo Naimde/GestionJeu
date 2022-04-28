@@ -13,6 +13,6 @@ public class PersonnageRequest {
     public LocalDate naissance;
     public String localisation;
     public String background;
-    public String info_public;   
+    public String info_public;
     public String jeu;
 }

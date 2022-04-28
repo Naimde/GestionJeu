@@ -13,6 +13,8 @@ export class AfficheMembreComponent implements OnInit {
   Addform!:FormGroup;
 
   @Input() groupe!:Groupe;
+  @Input() vision:Boolean=true;
+  @Input() action:Boolean=false;
 
   constructor(
     private api: OrgaApiService, private formbuilder:FormBuilder
@@ -20,7 +22,7 @@ export class AfficheMembreComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.trouveMembre(this.groupe);
+    this.trouveMembre(this.groupe);
     
     this.Addform = this.formbuilder.group({
       id_personnage:['',Validators.required],
@@ -28,9 +30,9 @@ export class AfficheMembreComponent implements OnInit {
     })
   }
 
-/*   deleteGroupe(group: Groupe) {
-    this.api.deleteGroupe(group.id_groupe).subscribe(() => this.loadAllGroups());
-  } */
+  deleteMembre(membre: Membre) {
+    this.api.deleteMembre(membre).subscribe(()=>this.trouveMembre(this.groupe));
+  }
 
 /*   loadAllGroups() {
     this.api.getAll(localStorage.getItem("jeu")!).subscribe(Groupes => this.groups = Groupes);
@@ -43,11 +45,11 @@ export class AfficheMembreComponent implements OnInit {
     }
   } */
 
-/*   enregistrerGroupe(Groupe:Groupe){
-    this.api.editGroupe(Groupe).subscribe(() => this.loadAllGroups());
-  } */
+  enregistrerChange(membre:Membre){
+    this.api.editMembre(membre).subscribe();
+  }
 
   trouveMembre(groupe:Groupe){
-    this.api.trouveMembre(groupe.id_groupe).subscribe(x => {this.membres=x; console.log(this.membres)});
+    this.api.trouveMembre(groupe.id_groupe).subscribe(x => {this.membres=x;});
   }
 }

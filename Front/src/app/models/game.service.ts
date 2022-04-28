@@ -41,5 +41,15 @@ export class Membre {
 }
 
 export class Personnage {
-  
+  id_personnage!:string;
+  id_reelle!:string;
+  image!:string;
+  nom!:string;
+  prenom!:string;
+  surnom!:string;
+  genre!:string;
+  naissance!:Date;
+  localisation!:string;
+  background!:string;
+  info_public!:string;
 }

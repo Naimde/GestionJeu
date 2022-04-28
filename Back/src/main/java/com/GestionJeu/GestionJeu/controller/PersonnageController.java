@@ -26,7 +26,7 @@ public class PersonnageController {
     @Autowired
     private PersonnageRepository personnagerepository;
 
-    @GetMapping("/api/v1/personnages/{jeu}")
+    @GetMapping("/api/v1/personnages/jeu/{jeu}")
     @ResponseBody ResponseEntity<Iterable<Personnage>> list(@PathVariable String jeu){
         return ResponseEntity.ok().body(personnagerepository.findAllByJeu(jeu));
     }
