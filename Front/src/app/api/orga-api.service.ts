@@ -34,6 +34,10 @@ export class OrgaApiService {
     return this.http.get<any[]>(this.membre+"/groupe/"+id);
   }
 
+  createMembre(membre:any): Observable<Groupe> {
+    return this.http.post<any>(this.membre,membre)
+  }
+
   editMembre(membre:Membre): Observable<any>{
     return this.http.put<any[]>(this.membre,membre);
   }

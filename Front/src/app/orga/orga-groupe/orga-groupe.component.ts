@@ -13,6 +13,7 @@ export class OrgaGroupeComponent implements OnInit {
   groupeAffiche:number=1;
   groups:Groupe[]=[];
   Addform!:FormGroup;
+  Membreform!:FormGroup;
   Personnages:Personnage[]=[];
   PersoSelect!:string;
   membres:Membre[]=[];
@@ -30,11 +31,17 @@ export class OrgaGroupeComponent implements OnInit {
       nom:['',Validators.required],
       description:[''],
       jeu:[localStorage.getItem("jeu")]
-    })
+    });
+    this.Membreform = this.formbuilder.group({
+      idGroupe:[''],
+      idPersonnage:['',Validators.required],
+      description:[''],
+    });
+    this.membres.push
   }
 
   deleteGroupe(group: Groupe) {
-    this.api.deleteGroupe(group.id_groupe).subscribe(() => this.loadAllGroups());
+    this.api.deleteGroupe(group.id_groupe).subscribe(() => {this.loadAllGroups();this.display=false});
   }
 
   loadAllGroups() {
@@ -48,6 +55,14 @@ export class OrgaGroupeComponent implements OnInit {
     }
   }
 
+  createMembre(){
+    if (this.Membreform.valid) {
+      this.Membreform.controls["idGroupe"].setValue(this.groups[this.groupeAffiche].id_groupe);
+      this.api.createMembre(this.Membreform.value).subscribe(() =>{ this.loadAllGroups();this.Membreform.reset();this.display=false;
+      });
+    }
+  }
+
   enregistrerGroupe(Groupe:Groupe){
     this.api.editGroupe(Groupe).subscribe();
   }
@@ -56,7 +71,7 @@ export class OrgaGroupeComponent implements OnInit {
     this.display=true;
     this.groupeAffiche=index;
     this.trouveMembre(this.groups[index]);
-    this.PersoSelect="";
+    this.Membreform.reset();
   }
 
   recupPersonnage(){

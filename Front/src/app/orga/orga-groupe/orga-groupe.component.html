@@ -2,8 +2,8 @@
     <thead>
         <th>Genre</th>
         <th>Nom</th>
-        <th>Description</th>
         <th>Membres</th>
+        <th>Vision</th>
         <th>Action</th>
     </thead>
     <tbody>
@@ -11,46 +11,62 @@
             <td><input formControlName="genre" type="text" placeholder="Genre"></td>
             <td><input formControlName="nom" type="email" placeholder="Nom"></td>
             <td><input formControlName="description" type="text" placeholder="Description"></td>
-            <td><button pButton label="Créer" class="p-button-success" (click)="createGroupe()"></button></td>
-         </tr>
+            <td><button pButton label="Créer" class="p-button-success" (click)="createGroupe()" [disabled]="Addform.invalid"></button></td>
+        </tr>
         <tr *ngFor="let group of groups; let index = index">
             <td>{{groups[index].genre}}</td>
-            <td><input (change)="enregistrerGroupe(groups[index])" type="text" [(ngModel)]="groups[index].nom" pInputText placeholder="Nom"></td>
-            <td><input (change)="enregistrerGroupe(groups[index])" type="text" [(ngModel)]="groups[index].description" pInputText placeholder="Description"></td>
+            <td><input (change)="enregistrerGroupe(groups[index])" type="text" [(ngModel)]="groups[index].nom"
+                    pInputText placeholder="Nom"></td>
+
             <td>
                 <app-affiche-membre [groupe]="groups[index]" [vision]="false"></app-affiche-membre>
             </td>
-            <td><p-toggleButton (onChange)="enregistrerGroupe(groups[index])" onLabel="Visible" offLabel="Caché" [(ngModel)]="groups[index].visionautre" [disabled]="true"></p-toggleButton></td>
-            
             <td>
-                <button pButton label="Delete" class="p-button-danger" (click)="deleteGroupe(group)"></button>       
+                <p-toggleButton (onChange)="enregistrerGroupe(groups[index])" onLabel="Visible" offLabel="Caché"
+                    [(ngModel)]="groups[index].visionautre" [disabled]="true"></p-toggleButton>
             </td>
-            <button pButton  type="text" (click)="afficheLateral(index)" icon="pi pi-plus" label="Détails"></button>
+            <td>
+                <button pButton type="text" (click)="afficheLateral(index)" icon="pi pi-plus" label="Détails"></button>
+            </td>
         </tr>
     </tbody>
 </table>
 
-<p-sidebar [(visible)]="display" position="right" styleClass="p-sidebar-lg">
+<p-sidebar [(visible)]="display" position="right" styleClass="p-sidebar-md">
     <div *ngIf="display">
         <span>Id Groupe : {{groups[groupeAffiche].id_groupe}}</span>
         <h4>Nom</h4>
         <span>{{groups[groupeAffiche].nom}}</span>
         <h4>Vision des membres les uns rapport aux autres</h4>
-        <p-toggleButton (onChange)="enregistrerGroupe(groups[groupeAffiche])" onLabel="Visible" offLabel="Caché" [(ngModel)]="groups[groupeAffiche].visionautre"></p-toggleButton>    <h4>Leader</h4>
+        <p-toggleButton (onChange)="enregistrerGroupe(groups[groupeAffiche])" onLabel="Visible" offLabel="Caché"
+            [(ngModel)]="groups[groupeAffiche].visionautre"></p-toggleButton>
+        <h4>Leader</h4>
         <span>{{groups[groupeAffiche].leader}}</span>
-        <h4>Membres</h4>
-        <app-affiche-membre [groupe]="groups[groupeAffiche]" [vision]="groups[groupeAffiche].visionautre" [action]="true"></app-affiche-membre>
+        <div>
+            <h4>Membres</h4>
+            <app-affiche-membre [groupe]="groups[groupeAffiche]" [vision]="groups[groupeAffiche].visionautre" [action]="true"></app-affiche-membre>
+        </div>
         <h4>Description</h4>
-        <span>{{groups[groupeAffiche].description}}</span>
-        <br>
-        
-        <select [(ngModel)]="PersoSelect">
-            <option [ngValue]="null"></option>
-            <option *ngFor="let personnage of Personnages" [ngValue]="personnage.id_personnage">
-                <app-perso-nom *ngIf="isNotMember(personnage)" [id]="personnage.id_personnage"></app-perso-nom>
-            </option>
-        </select>
-        
-        <span *ngIf="PersoSelect">  {{PersoSelect}}</span>
+        <textarea pInputTextarea (change)="enregistrerGroupe(groups[groupeAffiche])" type="text"
+            [(ngModel)]="groups[groupeAffiche].description" pInputText placeholder="Description" [autoResize]="true"></textarea>
+
+        <div [formGroup]="Membreform">
+            <select formControlName="idPersonnage">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let personnage of Personnages" [ngValue]="personnage.id_personnage"
+                    [disabled]="!isNotMember(personnage)">
+                    <app-perso-nom [id]="personnage.id_personnage"></app-perso-nom>
+                </option>
+            </select>
+            <textarea formControlName="description" pInputTextarea cols="40" [rows]="1" placeholder="Rien de spécial"
+                [autoResize]="true"></textarea>
+            <button pButton label="Rajouter" class="p-button-success" (click)="createMembre()" [disabled]="Membreform.invalid"></button>
+        </div>
+
+        <div>
+            <h4>Supprimer Groupe (possiblement seulement si vide)</h4>
+            <button [disabled]="membres.length!==0" pButton label="Delete" class="p-button-danger"
+                (click)="deleteGroupe(groups[groupeAffiche])"></button>
+        </div>
     </div>
 </p-sidebar>

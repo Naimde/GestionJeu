@@ -30,7 +30,7 @@
             <td><input formControlName="username" type="text" placeholder="Username" name="name"></td>
             <td><input formControlName="mail" type="email" placeholder="Mail" name="mail"></td>
             <td><input formControlName="password" type="text" placeholder="Password" name="password"></td>
-            <td><button pButton label="Créer" class="p-button-success" (click)="createUser()"></button>
+            <td><button pButton label="Créer" class="p-button-success" (click)="createUser()" [disabled]="Addform.invalid"></button>
         </tr>
         <tr *ngFor="let user of users; let index = index">
             <td>{{user.username}}</td>
