@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AdminApiService } from 'src/app/api/admin-api.service';
 
@@ -10,12 +10,12 @@ import { AdminApiService } from 'src/app/api/admin-api.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-    registerForm!: FormGroup;
+    registerForm!: UntypedFormGroup;
     loading = false;
     submitted = false;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private router: Router,
         private userService: AdminApiService,
     ) {

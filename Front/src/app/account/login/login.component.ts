@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { ConnectApiService } from 'src/app/api/connect-api.service';
 
@@ -10,11 +10,11 @@ import { ConnectApiService } from 'src/app/api/connect-api.service';
     styleUrls: ['./login.component.scss']
   })
 export class LoginComponent implements OnInit {
-    loginForm!: FormGroup;
+    loginForm!: UntypedFormGroup;
     returnUrl!: string;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: ConnectApiService,

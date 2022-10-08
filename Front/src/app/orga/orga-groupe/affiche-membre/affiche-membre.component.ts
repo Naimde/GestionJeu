@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { OrgaApiService } from 'src/app/api/orga-api.service';
 import { Groupe, Membre } from 'src/app/models/game.service';
 
@@ -10,14 +10,14 @@ import { Groupe, Membre } from 'src/app/models/game.service';
 })
 export class AfficheMembreComponent implements OnInit {
   membres:Membre[]=[];
-  Addform!:FormGroup;
+  Addform!:UntypedFormGroup;
 
   @Input() groupe!:Groupe;
   @Input() vision:Boolean=true;
   @Input() action:Boolean=false;
 
   constructor(
-    private api: OrgaApiService, private formbuilder:FormBuilder
+    private api: OrgaApiService, private formbuilder:UntypedFormBuilder
   ) {
   }
 

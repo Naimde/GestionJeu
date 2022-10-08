@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AdminApiService } from '../api/admin-api.service';
 import { Role, User } from '../models/accounts.service';
 
@@ -12,11 +12,11 @@ export class AdminComponent implements OnInit {
   display:any;
   users:User[]=[];
   roleList:Role[] = [];
-  Addform!:FormGroup;
+  Addform!:UntypedFormGroup;
   gameName:string="";
 
   constructor(
-    private api: AdminApiService, private formbuilder:FormBuilder
+    private api: AdminApiService, private formbuilder:UntypedFormBuilder
   ) {
   }
 

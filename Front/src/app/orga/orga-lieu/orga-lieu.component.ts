@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { OrgaApiService } from 'src/app/api/orga-api.service';
 import { Lieu, Personnage } from 'src/app/models/game.service';
 
@@ -12,13 +12,13 @@ export class OrgaLieuComponent implements OnInit {
   display:any;
   LieuAffiche:number=1;
   lieux:Lieu[]=[];
-  Addform!:FormGroup;
-  Membreform!:FormGroup;
+  Addform!:UntypedFormGroup;
+  Membreform!:UntypedFormGroup;
   Personnages:Personnage[]=[];
   PersoSelect!:string;
 
   constructor(
-    private api: OrgaApiService, private formbuilder:FormBuilder
+    private api: OrgaApiService, private formbuilder:UntypedFormBuilder
   ) {
   }
 

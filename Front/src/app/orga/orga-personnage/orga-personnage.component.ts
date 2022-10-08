@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder} from '@angular/forms';
+import { UntypedFormBuilder} from '@angular/forms';
 
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
@@ -26,7 +26,7 @@ export class OrgaPersonnageComponent implements OnInit {
   statuses!: any[];
 
   constructor(
-    private api: OrgaApiService, private formbuilder:FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService
+    private api: OrgaApiService, private formbuilder:UntypedFormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService
   ) {
   }
 
