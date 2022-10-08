@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConnectComponent } from './connect.component';
+import { OrgaObjetComponent } from './orga-objet.component';
 
-describe('ConnectComponent', () => {
-  let component: ConnectComponent;
-  let fixture: ComponentFixture<ConnectComponent>;
+describe('OrgaObjetComponent', () => {
+  let component: OrgaObjetComponent;
+  let fixture: ComponentFixture<OrgaObjetComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConnectComponent ]
+      declarations: [ OrgaObjetComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConnectComponent);
+    fixture = TestBed.createComponent(OrgaObjetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

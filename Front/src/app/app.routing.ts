@@ -5,7 +5,6 @@ import { AdminComponent } from './admin/admin.component';
 import { OrgaComponent } from './orga/orga.component';
 import { PjComponent } from './pj/pj.component';
 
-import { ConnectComponent } from './tmp/connect/connect.component';
 import { AuthGuard } from './helpers/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 

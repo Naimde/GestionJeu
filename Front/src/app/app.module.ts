@@ -13,6 +13,15 @@ import {RippleModule} from 'primeng/ripple';
 import {SidebarModule} from 'primeng/sidebar';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
+import {ToolbarModule} from 'primeng/toolbar';
+import {FileUploadModule} from 'primeng/fileupload';
+import {TableModule} from 'primeng/table';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import {DialogModule} from 'primeng/dialog';
 
 
 
@@ -24,7 +33,6 @@ import { AdminComponent } from './admin/admin.component';
 import { PersoConnuComponent } from './pj/perso-connu/perso-connu.component';
 import { GroupeConnuComponent } from './pj/groupe-connu/groupe-connu.component';
 import { LieuConnuComponent } from './pj/lieu-connu/lieu-connu.component';
-import { ConnectComponent } from './tmp/connect/connect.component';
 import { AuthInterceptor } from './helpers/auth-interceptor.service';
 import { appRoutingModule } from './app.routing';
 import { LoginComponent } from './account/login/login.component';
@@ -34,6 +42,8 @@ import { OrgaPersonnageComponent } from './orga/orga-personnage/orga-personnage.
 import { OrgaGroupeComponent } from './orga/orga-groupe/orga-groupe.component';
 import { AfficheMembreComponent } from './orga/orga-groupe/affiche-membre/affiche-membre.component';
 import { PersoNomComponent } from './helpers/perso-nom/perso-nom.component';
+import { OrgaLieuComponent } from './orga/orga-lieu/orga-lieu.component';
+import { OrgaObjetComponent } from './orga/orga-objet/orga-objet.component';
 
 @NgModule({
   declarations: [
@@ -45,14 +55,15 @@ import { PersoNomComponent } from './helpers/perso-nom/perso-nom.component';
     PersoConnuComponent,
     GroupeConnuComponent,
     LieuConnuComponent,
-    ConnectComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
     OrgaPersonnageComponent,
     OrgaGroupeComponent,
     AfficheMembreComponent,
-    PersoNomComponent
+    PersoNomComponent,
+    OrgaLieuComponent,
+    OrgaObjetComponent
   ],
   imports: [
     BrowserModule,
@@ -69,9 +80,19 @@ import { PersoNomComponent } from './helpers/perso-nom/perso-nom.component';
     SidebarModule,
     appRoutingModule,
     ToggleButtonModule,
-    InputTextareaModule
+    InputTextareaModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule,
+    ToolbarModule,
+    FileUploadModule,
+    TableModule,
+    ConfirmDialogModule,
+    DialogModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -45,7 +45,7 @@ export class OrgaGroupeComponent implements OnInit {
   }
 
   loadAllGroups() {
-    this.api.getAll(localStorage.getItem("jeu")!).subscribe(Groupes => this.groups = Groupes);
+    this.api.getAllGroupes(localStorage.getItem("jeu")!).subscribe(Groupes => this.groups = Groupes);
   }
 
   createGroupe(){

@@ -4,18 +4,17 @@
             personnage
         </p-tabPanel>
         <p-tabPanel header="Personnage">
-            <app-orga-personnage></app-orga-personnage>
-        </p-tabPanel>
-        <p-tabPanel header="Groupes" [selected]="true">
+            A developper
+<!--             <app-orga-personnage></app-orga-personnage>
+ -->        </p-tabPanel>
+        <p-tabPanel header="Groupes">
             <app-orga-groupe></app-orga-groupe>
         </p-tabPanel>
         <p-tabPanel header="Lieux">
-            <h3>Là où je suis</h3>
-            Récupérer le lieu où personnage.loc
+            <app-orga-lieu></app-orga-lieu>
         </p-tabPanel>
-        <p-tabPanel header="Objets">
-            <h3>Mes Objets</h3>
-            Récupérer les objets où possesseur=personnage et connus
+        <p-tabPanel header="Objets" [selected]="true">
+            <app-orga-objet></app-orga-objet>
         </p-tabPanel>
         <p-tabPanel header="Secrets">
             <h3>Mes Secrets</h3>

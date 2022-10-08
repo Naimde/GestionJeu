@@ -1,0 +1,65 @@
+<table>
+    <thead>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr [formGroup]="Addform">
+            <td><input formControlName="nom" type="email" placeholder="Nom"></td>
+            <td><input formControlName="description" type="text" placeholder="Description"></td>
+            <td><button pButton label="Créer" class="p-button-success" (click)="createObjet()" [disabled]="Addform.invalid"></button></td>
+        </tr>
+        <tr *ngFor="let objet of objets; let index = index">
+            <td><input (change)="enregistrerObjet(objets[index])" type="text" [(ngModel)]="objets[index].nom"
+                    pInputText placeholder="Nom"></td>
+
+            <td><input (change)="enregistrerObjet(objets[index])" type="text" [(ngModel)]="objets[index].description"
+                pInputText placeholder="Description">
+            </td>
+            <td>
+                <button pButton type="text" class="p-button-danger" (click)="deleteObjet(objets[index])" icon="pi pi-times" label="Supprimer"></button>
+                <button pButton type="text" (click)="afficheLateral(index)" icon="pi pi-plus" label="Détails"></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- <p-sidebar [(visible)]="display" position="right" styleClass="p-sidebar-md">
+    <div *ngIf="display">
+        <span>Id Lieu : {{lieux[LieuAffiche].id_lieu}}</span>
+        <h4>Nom</h4>
+        <span>{{lieux[LieuAffiche].nom}}</span>
+        <h4>Vision des membres les uns rapport aux autres</h4>
+        <p-toggleButton (onChange)="enregistrerLieu(lieux[LieuAffiche])" onLabel="Visible" offLabel="Caché"
+            [(ngModel)]="lieux[LieuAffiche].visionautre"></p-toggleButton>
+        <h4>Leader</h4>
+        <span>{{lieux[LieuAffiche].leader}}</span>
+        <div>
+            <h4>Membres</h4>
+            <app-affiche-membre [Lieu]="lieux[LieuAffiche]" [vision]="lieux[LieuAffiche].visionautre" [action]="true"></app-affiche-membre>
+        </div>
+        <h4>Description</h4>
+        <textarea pInputTextarea (change)="enregistrerLieu(lieux[LieuAffiche])" type="text"
+            [(ngModel)]="lieux[LieuAffiche].description" pInputText placeholder="Description" [autoResize]="true"></textarea>
+
+        <div [formGroup]="Membreform">
+            <select formControlName="idPersonnage">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let personnage of Personnages" [ngValue]="personnage.id_personnage"
+                    [disabled]="!isNotMember(personnage)">
+                    <app-perso-nom [id]="personnage.id_personnage"></app-perso-nom>
+                </option>
+            </select>
+            <textarea formControlName="description" pInputTextarea cols="40" [rows]="1" placeholder="Rien de spécial"
+                [autoResize]="true"></textarea>
+            <button pButton label="Rajouter" class="p-button-success" (click)="createMembre()" [disabled]="Membreform.invalid"></button>
+        </div>
+
+        <div>
+            <h4>Supprimer Lieu (possiblement seulement si vide)</h4>
+            <button [disabled]="membres.length!==0" pButton label="Delete" class="p-button-danger"
+                (click)="deleteLieu(lieux[LieuAffiche])"></button>
+        </div>
+    </div>
+</p-sidebar> -->

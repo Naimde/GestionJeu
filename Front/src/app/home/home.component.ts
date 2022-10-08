@@ -14,7 +14,8 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private connect : ConnectApiService) { }
 
   ngOnInit(): void {
-    this.connect.getReturn().subscribe(data => {this.autorisation=data.authorities;
+    this.connect.getReturn().subscribe(data => {
+      this.autorisation=data.authorities;
     });
   }
 

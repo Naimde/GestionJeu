@@ -8,6 +8,8 @@ export class AuthGuard implements CanActivate {
     ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        console.log(state.url);
+
         if (localStorage.getItem("token")) {
             // authorised so return true
             return true;

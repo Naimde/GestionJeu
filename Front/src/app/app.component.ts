@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 
@@ -7,9 +7,12 @@ import { PrimeNGConfig } from 'primeng/api';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
 
-  constructor(private router: Router,private primengConfig: PrimeNGConfig) {  }
+  constructor(
+        private router: Router,
+        private primengConfig: PrimeNGConfig
+    ) {  }
 
     ngOnInit() {
         this.primengConfig.ripple = true;
@@ -21,7 +24,7 @@ export class AppComponent implements OnInit {
     }
 
     logOut(){
-        localStorage.clear();
+        localStorage.clear(); 
         this.router.navigate(['login']);
     }
 

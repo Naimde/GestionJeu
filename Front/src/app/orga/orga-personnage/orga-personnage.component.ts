@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdminApiService } from '../../api/admin-api.service';
-import { Role, User } from '../../models/accounts.service';
+import { FormBuilder} from '@angular/forms';
+
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { Personnage } from 'src/app/models/game.service';
+
+import { OrgaApiService } from 'src/app/api/orga-api.service';
 
 @Component({
   selector: 'app-orga-personnage',
@@ -9,70 +13,89 @@ import { Role, User } from '../../models/accounts.service';
   styleUrls: ['./orga-personnage.component.scss']
 })
 export class OrgaPersonnageComponent implements OnInit {
-  display:any;
-  users:User[]=[];
-  roleList:Role[] = [];
-  Addform!:FormGroup;
-  gameName:string="";
+  productDialog!: boolean;
+
+  products!: Personnage[];
+
+  product!: Personnage;
+
+  selectedProducts!: Personnage[];
+
+  submitted!: boolean;
+
+  statuses!: any[];
 
   constructor(
-    private api: AdminApiService, private formbuilder:FormBuilder
+    private api: OrgaApiService, private formbuilder:FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService
   ) {
   }
 
   ngOnInit() {
-    this.loadAllUsers();
-    
-    this.Addform = this.formbuilder.group({
-      username:['',Validators.required],
-      mail:['',Validators.required],
-      password:['',Validators.required]
-    })
+    this.api.getAllPersonnage(localStorage.getItem("jeu")!).subscribe(data => this.products = data);
+
+    this.statuses = [
+        {label: 'INSTOCK', value: 'instock'},
+        {label: 'LOWSTOCK', value: 'lowstock'},
+        {label: 'OUTOFSTOCK', value: 'outofstock'}
+    ];
   }
 
-  deleteUser(id: string) {
-    this.api.deleteUser(id).subscribe(() => this.loadAllUsers());
+  openNew() {
+    this.product = new Personnage();
+    this.submitted = false;
+    this.productDialog = true;
   }
 
-  loadAllUsers() {
-    this.listRoles();
-    this.api.getAll().subscribe(users => this.users = users);
+  deleteSelectedProducts() {
+    this.confirmationService.confirm({
+        message: 'Are you sure you want to delete the selected products?',
+        header: 'Confirm',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            this.products = this.products.filter(val => !this.selectedProducts.includes(val));
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
+        }
+    });
   }
 
-  createUser(){
-    if (this.Addform.valid) {
-      this.api.createUser(this.Addform.value).subscribe(() => this.loadAllUsers());
-      this.Addform.reset();
+  editProduct(product: Personnage) {
+    this.product = {...product};
+    this.productDialog = true;
+  }
+
+  deleteProduct(product: Personnage) {
+    this.confirmationService.confirm({
+        message: 'Are you sure you want to delete ' + product.nom + '?',
+        header: 'Confirm',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            this.products = this.products.filter(val => val.id_personnage !== product.id_personnage);
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
+        }
+    });
+  }
+
+  hideDialog() {
+    this.productDialog = false;
+    this.submitted = false;
+  }
+
+  saveProduct() {
+    this.submitted = true;
+
+    if (this.product.id_personnage.trim()) {
+        if (this.product.id_personnage) {
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
+        }
+        else {
+            this.product.info_public = 'product-placeholder.svg';
+            this.products.push(this.product);
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
+        }
+
+        this.products = [...this.products];
+        this.productDialog = false;
     }
   }
 
-  enregistrerUser(user:User){
-    this.api.editUser(user).subscribe(() => this.loadAllUsers());
-  }
-
-  createGame(){
-    this.api.createGame(this.gameName+"-pj").subscribe();
-    this.api.createGame(this.gameName+"-orga").subscribe();
-    this.loadAllUsers();
-    this.gameName="";
-    this.display=false;
-  }
-
-  deleteRole(name:string,role:any){
-    this.api.deleteRole(name,role.id).subscribe(() => this.loadAllUsers());
-  }
-
-  addRole(name:string,role:any){
-    this.api.addRole(name,role.id).subscribe(() => this.loadAllUsers());
-  }
-
-  listRoles(){
-    this.api.listRoles().subscribe(roles => this.roleList = roles);
-  }
-
-  isNotInUserRole(role:Role,user:User): Boolean{
-    if(user.roles.find(e => e.id === role.id))
-      return false;
-    return true;
-  }
 }
